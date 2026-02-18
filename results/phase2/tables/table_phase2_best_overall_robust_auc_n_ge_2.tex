@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{llrllll}
+\hline
+病変 & 最良手法 & 比率 & AUC & AUPRC & ΔAUC(対ベースライン) & ΔAUPRC(対ベースライン) \\
+\hline
+Atelectasis & RandomOverSampler & 0.700000 & 0.7547 \pm 0.0007 (n=3) & 0.3269 \pm 0.0035 (n=3) & 0.0004 & 0.0066 \\
+Cardiomegaly & ADASYN & 0.700000 & 0.8828 \pm 0.0036 (n=3) & 0.2973 \pm 0.0078 (n=3) & 0.0041 & 0.0078 \\
+Consolidation & RandomOverSampler & 0.500000 & 0.7022 \pm 0.0063 (n=3) & 0.1263 \pm 0.0051 (n=3) & 0.0075 & 0.0070 \\
+Edema & RandomOverSampler & 0.900000 & 0.8058 \pm 0.0046 (n=3) & 0.1226 \pm 0.0045 (n=3) & 0.0251 & 0.0123 \\
+Pleural Effusion & SMOTE & 0.700000 & 0.8198 \pm 0.0014 (n=3) & 0.5022 \pm 0.0011 (n=3) & 0.0004 & 0.0012 \\
+\hline
+\end{tabular}
+\caption{病変別の最良設定（auc\_n ≥ 2 に限定）}
+\label{tab:phase2_best_overall_robust}
+\end{table}

@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{llrllll}
+\hline
+病変 & 候補手法 & 比率 & AUC & AUPRC & ΔAUC & 系統 \\
+\hline
+Atelectasis & RandomOverSampler & 0.700000 & 0.7547 \pm 0.0007 (n=3) & 0.3269 \pm 0.0035 (n=3) & 0.0004 & oversampling \\
+Atelectasis & SMOTE & 0.900000 & 0.7531 \pm 0.0061 (n=3) & 0.3237 \pm 0.0012 (n=3) & -0.0012 & oversampling \\
+Atelectasis & RandomOverSampler & 0.900000 & 0.7523 \pm 0.0020 (n=3) & 0.3232 \pm 0.0049 (n=3) & -0.0020 & oversampling \\
+Cardiomegaly & ADASYN & 0.700000 & 0.8828 \pm 0.0036 (n=3) & 0.2973 \pm 0.0078 (n=3) & 0.0041 & oversampling \\
+Cardiomegaly & SMOTE & 0.600000 & 0.8827 \pm 0.0034 (n=3) & 0.2984 \pm 0.0043 (n=3) & 0.0040 & oversampling \\
+Cardiomegaly & ADASYN & 0.500000 & 0.8821 \pm 0.0013 (n=3) & 0.2911 \pm 0.0060 (n=3) & 0.0033 & oversampling \\
+Consolidation & RandomOverSampler & 0.500000 & 0.7022 \pm 0.0063 (n=3) & 0.1263 \pm 0.0051 (n=3) & 0.0075 & oversampling \\
+Consolidation & SMOTE & 0.600000 & 0.7014 \pm 0.0060 (n=3) & 0.1238 \pm 0.0042 (n=3) & 0.0067 & oversampling \\
+Consolidation & ADASYN & 0.600000 & 0.7000 \pm 0.0057 (n=3) & 0.1240 \pm 0.0054 (n=3) & 0.0053 & oversampling \\
+Edema & RandomOverSampler & 0.900000 & 0.8058 \pm 0.0046 (n=3) & 0.1226 \pm 0.0045 (n=3) & 0.0251 & oversampling \\
+Edema & RandomUnderSampler & 0.700000 & 0.8057 \pm 0.0016 (n=3) & 0.1236 \pm 0.0011 (n=3) & 0.0250 & undersampling \\
+Edema & RandomOverSampler & 0.500000 & 0.8037 \pm 0.0034 (n=3) & 0.1251 \pm 0.0059 (n=3) & 0.0230 & oversampling \\
+Pleural Effusion & SMOTE & 0.700000 & 0.8198 \pm 0.0014 (n=3) & 0.5022 \pm 0.0011 (n=3) & 0.0004 & oversampling \\
+Pleural Effusion & ADASYN & 0.700000 & 0.8194 \pm 0.0011 (n=3) & 0.4999 \pm 0.0059 (n=3) & -0.0000 & oversampling \\
+Pleural Effusion & ADASYN & 0.800000 & 0.8194 \pm 0.0011 (n=3) & 0.4999 \pm 0.0059 (n=3) & -0.0000 & oversampling \\
+\hline
+\end{tabular}
+\caption{Phase 3 に向けた候補設定（Top-3, auc\_n ≥ 2）}
+\label{tab:phase3_candidates}
+\end{table}

@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.env/
+.venv/
+
+# PyTorch model weights (large files - upload to HuggingFace or GitHub Releases)
+*.pth
+*.pt
+*.ckpt
+
+# Data files (not redistributable due to dataset license)
+# Download CheXpert from: https://stanfordmlgroup.github.io/competitions/chexpert/
+# Download CXR8 from: https://nihcc.app.box.com/v/ChestXray-NIHCC
+CheXpert/
+CXR8/
+*.nii
+*.nii.gz
+*.dcm
+
+# Log files
+*.log
+experiments.log
+experiment_output*.log
+
+# Lock files
+*.lock
+
+# Result files (raw experiment outputs - too large for git)
+results/multilabel/models/
+results/multilabel/evaluations/
+results/multilabel/experiment_logs/
+results/phase2/raw/
+results/phase2/tables/csv/
+
+# Intermediate results CSVs (keep only final paper assets)
+results/*.csv
+results/*.json
+
+# Windows-specific
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
+*.Zone.Identifier
+
+# macOS-specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Distribution
+*.tar.gz
+*.zip

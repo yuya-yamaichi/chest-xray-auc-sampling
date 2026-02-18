@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{p{0.35\linewidth}p{0.35\linewidth}ll}
+\hline
+手法 & 代表設定（要約） & Macro AUC & Macro AUPRC \\
+\hline
+0（ベースライン） & default & 0.7662 $\pm$ 0.0071 & 0.2432 $\pm$ 0.0026 \\
+A（病変別最適サンプリング転用） & use\_phase2\_defaults=False & 0.7598 $\pm$ 0.0024 & 0.2325 $\pm$ 0.0023 \\
+B（Manifold Mixup） & alpha=2.0, rare\_weight=2.0 & 0.7238 $\pm$ 0.0017 & 0.1938 $\pm$ 0.0044 \\
+C（分布補正WeightedSampler） & mode=sqrt\_inv, boost=2.0 & 0.7613 $\pm$ 0.0020 & 0.2396 $\pm$ 0.0022 \\
+D（ML-SMOTE） & k=5, thr=meanIR & 0.7228 $\pm$ 0.0633 & 0.2104 $\pm$ 0.0546 \\
+\hline
+\end{tabular}}
+\caption{マルチラベル分類（CXR8テスト）における各approachの代表設定の比較（macro指標，平均$\pm$標準偏差，3 seed）}
+\label{tab:multilabel_best_by_approach}
+\end{table}

@@ -1,0 +1,144 @@
+# Multi-label Chest X-ray Classification Configuration
+# Master's Thesis Research: Comparison of Sampling Approaches
+
+# =====================================================================================
+# DATASET CONFIGURATION
+# =====================================================================================
+dataset:
+  # CheXpert dataset paths
+  chexpert_root: "/home/yamaichi/CheXpert/CheXpert-v1.0/"
+  train_csv: "train.csv"
+  valid_csv: "valid.csv"
+  
+  # CXR8 test dataset paths
+  cxr8_root: "/home/yamaichi/CXR8/dataset/test_dataset/"
+  cxr8_test_csv: "/home/yamaichi/master_theis/cxr8_test.csv"
+  
+  # Image settings
+  image_size: 224
+  use_frontal_only: true
+  
+  # Label handling
+  uncertainty_policy: "zeros"  # 'zeros', 'ones', or 'ignore'
+
+# =====================================================================================
+# MODEL CONFIGURATION
+# =====================================================================================
+model:
+  architecture: "densenet121"
+  num_classes: 5
+  pretrained: true
+  last_activation: null  # null for multi-label (use sigmoid in training)
+
+# =====================================================================================
+# TRAINING CONFIGURATION
+# Based on: 07_Optimizing_Multi_Label_AUROC_Loss_with_DenseNet121_on_CheXpert.ipynb
+# =====================================================================================
+training:
+  batch_size: 32
+  epochs: 2  # total_epochs from notebook
+  learning_rate: 0.1  # lr from notebook
+  epoch_decay: 0.002  # 2e-3 from notebook (use this instead of gamma)
+  margin: 1.0
+  weight_decay: 0.00001  # 1e-5 from notebook
+  num_workers: 4
+  
+  # Validation settings
+  validation_interval: 400  # Validate every N batches
+  
+  # Early stopping
+  patience: 3
+  min_delta: 0.001
+
+# =====================================================================================
+# SAMPLING APPROACH CONFIGURATIONS
+# =====================================================================================
+sampling:
+  # Default approach (can be overridden via CLI)
+  default_approach: "0"
+  
+  # Approach A: Disease-Adaptive Binary Relevance
+  # Settings derived from Phase 2 single-label experiments
+  # Based on: docs/Phase2_論文用_結果まとめ.md
+  approach_a:
+    # Per-disease optimal sampling methods
+    methods:
+      0: "ADASYN"            # Cardiomegaly: ΔAUC=+0.0061
+      1: "RandomOverSampler" # Edema: ΔAUC=+0.0251 (最大改善)
+      2: "RandomOverSampler" # Consolidation: ΔAUC=+0.0075
+      3: "RandomOverSampler" # Atelectasis: ΔAUC=+0.0004
+      4: "SMOTE"             # Pleural Effusion: ΔAUC=+0.0004
+    
+    # Per-disease optimal sampling ratios (minority/majority)
+    ratios:
+      0: 0.7   # Cardiomegaly
+      1: 0.9   # Edema
+      2: 0.5   # Consolidation
+      3: 0.7   # Atelectasis
+      4: 0.7   # Pleural Effusion (SMOTE)
+    
+    k_neighbors: 5
+    use_phase2_defaults: true  # Use optimal settings from Phase 2
+  
+  # Approach B: Manifold Mixup
+  approach_b:
+    alpha: 1.0
+    rare_weight: 2.0
+    min_lambda: 0.2
+    mix_probability: 0.5
+    mixup_layer: "features.denseblock3"
+  
+  # Approach C: Distribution-Balanced WeightedSampler
+  approach_c:
+    reweight_mode: "sqrt_inv"  # 'inverse', 'sqrt_inv', 'effective_num'
+    multi_label_boost: 1.5
+    replacement: true
+  
+  # Approach D: ML-SMOTE
+  approach_d:
+    k_neighbors: 5
+    threshold: "meanIR"
+
+# =====================================================================================
+# EVALUATION CONFIGURATION
+# =====================================================================================
+evaluation:
+  batch_size: 64
+  threshold: 0.5
+  use_optimal_threshold: false
+  
+  # Test-time augmentation
+  tta_enabled: false
+  tta_modes: ["none", "hflip"]
+
+# =====================================================================================
+# OUTPUT PATHS
+# =====================================================================================
+paths:
+  models_dir: "models/multilabel"
+  results_dir: "results/multilabel"
+  logs_dir: "results/multilabel/logs"
+
+# =====================================================================================
+# REPRODUCIBILITY
+# =====================================================================================
+reproducibility:
+  seed: 123
+  deterministic: true
+  benchmark: false
+  
+  # Multiple seeds for statistical significance
+  experiment_seeds:
+    - 42
+    - 123
+    - 456
+
+# =====================================================================================
+# PATHOLOGY NAMES
+# =====================================================================================
+pathologies:
+  0: "Cardiomegaly"
+  1: "Edema"
+  2: "Consolidation"
+  3: "Atelectasis"
+  4: "Pleural Effusion"

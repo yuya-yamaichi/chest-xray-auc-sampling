@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{lcccc}
+\hline
+病変 & Baseline AUC & Best-C AUC & Baseline AUPRC & Best-C AUPRC \\
+\hline
+心拡大 & 0.8477 $\pm$ 0.0074 & 0.8585 $\pm$ 0.0024 & 0.2483 $\pm$ 0.0076 & 0.2581 $\pm$ 0.0044 \\
+浮腫 & 0.7573 $\pm$ 0.0308 & 0.7487 $\pm$ 0.0102 & 0.0955 $\pm$ 0.0099 & 0.0983 $\pm$ 0.0089 \\
+浸潤影 & 0.6887 $\pm$ 0.0073 & 0.6846 $\pm$ 0.0046 & 0.1133 $\pm$ 0.0046 & 0.1159 $\pm$ 0.0023 \\
+無気肺 & 0.7207 $\pm$ 0.0027 & 0.7053 $\pm$ 0.0040 & 0.2703 $\pm$ 0.0052 & 0.2503 $\pm$ 0.0085 \\
+胸水 & 0.8167 $\pm$ 0.0011 & 0.8094 $\pm$ 0.0036 & 0.4887 $\pm$ 0.0041 & 0.4757 $\pm$ 0.0107 \\
+\hline
+\end{tabular}
+\caption{ベースラインとapproach C（最良設定）の病変別性能（CXR8テスト, 平均$\pm$標準偏差）}
+\label{tab:multilabel_baseline_vs_bestC_per_label}
+\end{table}
